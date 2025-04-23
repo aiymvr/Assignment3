@@ -1,29 +1,44 @@
 public class Main {
     public static void main(String[] args) {
-        // Create a hashtable with 100 buckets
+        // ============================
+        // MyHashTable Usage Section
+        // ============================
+
+        // Create a hash table with 100 buckets
         MyHashTable<MyTestingClass, Student> table = new MyHashTable<>(100);
 
-        // Add 10,000 random entries
+        // Add 10,000 random entries to the hash table
         for (int i = 0; i < 10000; i++) {
-            int f1 = (int)(Math.random() * 10000);
-            int f2 = (int)(Math.random() * 10000);
+            int f1 = (int)(Math.random() * 10000); // generate first feature
+            int f2 = (int)(Math.random() * 10000); // generate second feature
+
+            // Create key and value objects
             MyTestingClass key = new MyTestingClass(f1, f2);
             Student value = new Student(i, "Student" + i);
+
+            // Put the key-value pair into the hash table
             table.put(key, value);
         }
 
-        // Get bucket sizes from the helper method
+        // Get array representing the number of elements in each bucket
         int[] bucketSizes = table.getBucketSizes();
 
-        // Print the number of elements in each bucket
+        // Display how many elements are in each bucket
+        System.out.println("----- Hash Table Bucket Distribution -----");
         for (int i = 0; i < bucketSizes.length; i++) {
             System.out.println("Bucket " + i + ": " + bucketSizes[i] + " elements");
         }
-        System.out.println("\n=== BST DEMO ===");
 
+        // ============================
+        // BST (Binary Search Tree) Usage Section
+        // ============================
+
+        System.out.println("\n===== BST (Binary Search Tree) DEMO =====");
+
+        // Create a binary search tree with Integer keys and String values
         BST<Integer, String> tree = new BST<>();
 
-        // Add sample values to the BST
+        // Insert key-value pairs into the BST
         tree.put(50, "Root");
         tree.put(30, "Left Child");
         tree.put(70, "Right Child");
@@ -32,14 +47,16 @@ public class Main {
         tree.put(60, "Right-Left");
         tree.put(80, "Right-Right");
 
+        // Display the total number of elements in the tree
         System.out.println("BST Size: " + tree.size());
 
-        // In-order traversal output
+        // In-order traversal of the BST with key-value access
+        System.out.println("In-order traversal of BST:");
         for (BST.KeyValue<Integer, String> elem : tree) {
             System.out.println("key is " + elem.getKey() + " and value is " + elem.getValue());
         }
 
-        // Delete a key
+        // Delete a key (30) and show updated size and traversal
         tree.delete(30);
         System.out.println("\nBST Size after deleting key 30: " + tree.size());
 
@@ -47,7 +64,5 @@ public class Main {
         for (BST.KeyValue<Integer, String> elem : tree) {
             System.out.println("key is " + elem.getKey() + " and value is " + elem.getValue());
         }
-
     }
-
 }
