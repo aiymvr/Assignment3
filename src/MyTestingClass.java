@@ -1,34 +1,28 @@
-import java.util.Random;
-
 public class MyTestingClass {
-    private int field1;
-    private int field2;
+    private int feature1;
+    private int feature2;
 
-    public MyTestingClass(int field1, int field2) {
-        this.field1 = field1;
-        this.field2 = field2;
+    // Constructor
+    public MyTestingClass(int feature1, int feature2) {
+        this.feature1 = feature1;
+        this.feature2 = feature2;
     }
 
-    @Override
-    public int hashCode() {
-        int prime = 31;
-        int result = 1;
-        result = prime * result + field1;
-        result = prime * result + field2;
-        result = prime * result + (field1 ^ (field2 >>> 16));
-        return result;
-    }
-
+    // Override equals to compare both features
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (!(obj instanceof MyTestingClass)) return false;
         MyTestingClass other = (MyTestingClass) obj;
-        return field1 == other.field1 && field2 == other.field2;
+        return this.feature1 == other.feature1 && this.feature2 == other.feature2;
     }
 
+    // Custom hashCode to ensure uniform distribution
     @Override
-    public String toString() {
-        return "(" + field1 + ", " + field2 + ")";
+    public int hashCode() {
+        int hash = 17;
+        hash = 31 * hash + feature1;
+        hash = 31 * hash + feature2;
+        return hash;
     }
 }

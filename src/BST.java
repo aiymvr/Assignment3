@@ -1,10 +1,23 @@
 import java.util.*;
 
 public class BST<K extends Comparable<K>, V> implements Iterable<BST.KeyValue<K, V>> {
+
+    // Node class representing one element in the BST
+    private class Node {
+        private K key;
+        private V val;
+        private Node left, right;
+
+        public Node(K key, V val) {
+            this.key = key;
+            this.val = val;
+        }
+    }
+
     private Node root;
     private int size = 0;
 
-    // Wrapper class to store both key and value for iteration
+    // Wrapper class to hold key and value during iteration
     public static class KeyValue<K, V> {
         private final K key;
         private final V value;
@@ -23,18 +36,7 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BST.KeyValue<K,
         }
     }
 
-    private class Node {
-        private K key;
-        private V val;
-        private Node left, right;
-
-        public Node(K key, V val) {
-            this.key = key;
-            this.val = val;
-        }
-    }
-
-    // Add a key-value pair
+    // Insert a key-value pair into the BST
     public void put(K key, V val) {
         root = put(root, key, val);
     }
@@ -51,7 +53,7 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BST.KeyValue<K,
         return node;
     }
 
-    // Get a value by key
+    // Retrieve a value by key
     public V get(K key) {
         Node node = root;
         while (node != null) {
@@ -63,7 +65,7 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BST.KeyValue<K,
         return null;
     }
 
-    // Delete a node by key
+    // Delete a key from the BST
     public void delete(K key) {
         root = delete(root, key);
     }
@@ -76,9 +78,8 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BST.KeyValue<K,
         else if (cmp > 0) node.right = delete(node.right, key);
         else {
             size--;
-            if (node.right == null) return node.left;
             if (node.left == null) return node.right;
-
+            if (node.right == null) return node.left;
             Node temp = node;
             node = min(temp.right);
             node.right = deleteMin(temp.right);
@@ -89,7 +90,7 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BST.KeyValue<K,
 
     private Node min(Node node) {
         if (node.left == null) return node;
-        else return min(node.left);
+        return min(node.left);
     }
 
     private Node deleteMin(Node node) {
@@ -98,12 +99,12 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BST.KeyValue<K,
         return node;
     }
 
-    // Return number of elements
+    // Return current size of the BST
     public int size() {
         return size;
     }
 
-    // In-order iterator that yields key-value pairs
+    // In-order iterator implementation
     @Override
     public Iterator<KeyValue<K, V>> iterator() {
         List<KeyValue<K, V>> list = new ArrayList<>();
@@ -118,3 +119,4 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BST.KeyValue<K,
         inOrder(node.right, list);
     }
 }
+
