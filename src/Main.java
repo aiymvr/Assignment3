@@ -20,11 +20,12 @@ public class Main {
             table.put(key, value);
         }
 
-        // Get array representing the number of elements in each bucket
+
+        // Get the number of elements in each bucket of the hash table
         int[] bucketSizes = table.getBucketSizes();
 
-        // Display how many elements are in each bucket
-        System.out.println("----- Hash Table Bucket Distribution -----");
+        // Print out how many elements are in each bucket
+        System.out.println("HashTable Bucket Distribution:");
         for (int i = 0; i < bucketSizes.length; i++) {
             System.out.println("Bucket " + i + ": " + bucketSizes[i] + " elements");
         }
