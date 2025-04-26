@@ -29,40 +29,28 @@ public class Main {
             System.out.println("Bucket " + i + ": " + bucketSizes[i] + " elements");
         }
 
-        // ============================
-        // BST (Binary Search Tree) Usage Section
-        // ============================
+        System.out.println("\n===============================");
+        System.out.println("Demonstrating BST Traversal");
+        System.out.println("===============================\n");
 
-        System.out.println("\n===== BST (Binary Search Tree) DEMO =====");
-
-        // Create a binary search tree with Integer keys and String values
+        // Create a BST instance and add key-value pairs
         BST<Integer, String> tree = new BST<>();
+        tree.put(50, "Fifty");
+        tree.put(30, "Thirty");
+        tree.put(70, "Seventy");
+        tree.put(20, "Twenty");
+        tree.put(40, "Forty");
+        tree.put(60, "Sixty");
+        tree.put(80, "Eighty");
 
-        // Insert key-value pairs into the BST
-        tree.put(50, "Root");
-        tree.put(30, "Left Child");
-        tree.put(70, "Right Child");
-        tree.put(20, "Left-Left");
-        tree.put(40, "Left-Right");
-        tree.put(60, "Right-Left");
-        tree.put(80, "Right-Right");
-
-        // Display the total number of elements in the tree
-        System.out.println("BST Size: " + tree.size());
-
-        // In-order traversal of the BST with key-value access
-        System.out.println("In-order traversal of BST:");
-        for (BST.KeyValue<Integer, String> elem : tree) {
+        // Iterate through the BST using in-order traversal
+        System.out.println("In-order Traversal of BST:");
+        for (var elem : tree) {
             System.out.println("key is " + elem.getKey() + " and value is " + elem.getValue());
         }
 
-        // Delete a key (30) and show updated size and traversal
-        tree.delete(30);
-        System.out.println("\nBST Size after deleting key 30: " + tree.size());
+        // Print total size of BST
+        System.out.println("\nTotal size of BST: " + tree.size());
 
-        System.out.println("BST In-Order Traversal After Deletion:");
-        for (BST.KeyValue<Integer, String> elem : tree) {
-            System.out.println("key is " + elem.getKey() + " and value is " + elem.getValue());
-        }
     }
 }
