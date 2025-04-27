@@ -1,4 +1,4 @@
-#  HashTable and BST in Java
+#  HashTable and BST in Java(choose "master" branch to see)
 
 ##  Description
 
